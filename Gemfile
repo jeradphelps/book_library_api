@@ -17,6 +17,7 @@ gem 'angularjs-rails'
 gem "font-awesome-rails"
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'pry-rails'
