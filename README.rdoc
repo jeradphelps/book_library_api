@@ -1,28 +1,16 @@
-== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Book Library Api
 
-Things you may want to cover:
+## To Run Locally
 
-* Ruby version
+    > git clone https://github.com/jeradphelps/book_library_api.git
+    > cd book_library_api
+    > bundle
+    > rake db:migrate
+    > rails s
+    > in your browser, visit http://localhost:3000
 
-* System dependencies
+## Full API Endpoint Docs
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+    > rails s
+    > In your browser, visit: http://localhost:3000/apidoc

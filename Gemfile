@@ -18,6 +18,7 @@ gem "font-awesome-rails"
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'newrelic_rpm'
+gem 'googlebooks'
 
 group :development, :test do
   gem 'pry-rails'

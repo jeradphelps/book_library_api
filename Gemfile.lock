@@ -64,6 +64,8 @@ GEM
     execjs (2.0.2)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
+    googlebooks (0.0.8)
+      httparty
     grape (0.6.1)
       activesupport
       builder
@@ -93,6 +95,9 @@ GEM
       railties (>= 4.0.1)
     hashie (2.1.0)
     hike (1.2.3)
+    httparty (0.13.1)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.6.9)
     ice_nine (0.11.0)
     jbuilder (1.5.3)
@@ -208,6 +213,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   database_cleaner
   font-awesome-rails
+  googlebooks
   grape
   grape-swagger
   grape-swagger-rails

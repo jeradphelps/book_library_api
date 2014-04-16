@@ -4,8 +4,11 @@ class BookInstancesV1 < Grape::API
 
   resource :book_instances do
     desc "Return all book instances."
+    params do
+      requires :search_text, type: String, desc: "Search Text--title or author."
+    end
     get do
-      # BookInstance.order("created_at asc")
+      BookInstance.search(params[:search_text])
     end
 
     desc "Return a book instance."
@@ -18,24 +21,35 @@ class BookInstancesV1 < Grape::API
 
     desc "Create a book instance."
     params do
-      # requires :label, type: String, desc: "Todo label."
+      requires :title,  type: String, desc: "The Book title"
+      requires :genre,  type: String, desc: "The Book genre"
+      requires :isbn,   type: String, desc: "The Book isbn"
+      requires :author, type: String, desc: "The Book author"
     end
     post do
-      BookInstance.create!({
-        # label: params[:label]
-      })
+      book = Book.where(
+        isbn: params[:isbn],
+        title: params[:title],
+        genre: params[:genre],
+        author: params[:author]
+      ).first_or_create
+      BookInstance.create!(:book_id => book.id)
     end
 
     desc "Update a Book Instance."
     params do
-      requires :id, type: Integer, desc: "Book Instance ID."
-      # requires :label, type: String, desc: "Todo label."
+      requires :title,  type: String, desc: "The Book title"
+      requires :genre,  type: String, desc: "The Book genre"
+      requires :isbn,   type: String, desc: "The Book isbn"
+      requires :author, type: String, desc: "The Book author"
     end
     put ':id' do
       book_instance = BookInstance.find_by_id(params[:id]) || error!("Not Found", 404)
       book_instance.update({
-        # label: params[:label],
-        # done: params[:done]
+        isbn: params[:isbn],
+        title: params[:title],
+        genre: params[:genre],
+        author: params[:author]
       })
       book_instance
     end

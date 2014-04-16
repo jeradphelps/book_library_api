@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140415184343) do
     t.string   "title"
     t.string   "genre"
     t.string   "isbn"
-    t.integer  "author_id"
+    t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
