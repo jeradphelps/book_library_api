@@ -7,8 +7,8 @@ class GoogleBook
     @image_link = image_link
   end
 
-  def self.search str
-    GoogleBooks.search(str, {:count => 10}).map do |g_book|
+  def self.search str, user_ip
+    GoogleBooks.search(str, {:count => 10}, user_ip).map do |g_book|
       GoogleBook.new(g_book.title, g_book.authors, g_book.categories, g_book.isbn_13, g_book.image_link)
     end
   end

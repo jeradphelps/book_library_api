@@ -10,7 +10,12 @@
     > rails s
     > in your browser, visit http://localhost:3000
 
-## Full API Endpoint Docs
+## Full Local API Endpoint Docs
 
     > rails s
     > In your browser, visit: http://localhost:3000/apidoc
+
+## Full Hosted API Endpoint Docs
+
+    > booklibraryapi.herokuapp.com/apidoc
+    > enter "http://booklibraryapi.herokuapp.com/api/swagger_doc.json"

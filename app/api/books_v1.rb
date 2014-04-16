@@ -8,7 +8,7 @@ class BooksV1 < Grape::API
       requires :search_text, type: String, desc: "search text."
     end
     get do
-      GoogleBook.search(params[:search_text])
+      GoogleBook.search(params[:search_text], request.env["REMOTE_ADDR"])
     end
   end
 end
