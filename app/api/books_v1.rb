@@ -2,6 +2,10 @@ class BooksV1 < Grape::API
   version 'v1', using: :header, vendor: 'appydays'
   format :json
 
+  before do
+    authenticate! params[:access_token]
+  end
+
   resource :books do
     desc "Returns book search results."
     params do

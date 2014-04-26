@@ -2,6 +2,10 @@ class BookInstancesV1 < Grape::API
   version 'v1', using: :header, vendor: 'appydays'
   format :json
 
+  before do
+    authenticate! params[:access_token]
+  end
+
   resource :book_instances do
     desc "Return all book instances."
     params do
