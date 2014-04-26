@@ -6,6 +6,9 @@ class BookInstancesV1 < Grape::API
     authenticate! params[:access_token]
   end
 
+  params do
+    requires :access_token, type: String, desc: "access token."
+  end
   resource :book_instances do
     desc "Return all book instances."
     params do

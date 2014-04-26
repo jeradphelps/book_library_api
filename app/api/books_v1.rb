@@ -6,7 +6,11 @@ class BooksV1 < Grape::API
     authenticate! params[:access_token]
   end
 
+  params do
+    requires :access_token, type: String, desc: "access token."
+  end
   resource :books do
+
     desc "Returns book search results."
     params do
       requires :search_text, type: String, desc: "search text."
