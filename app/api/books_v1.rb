@@ -7,7 +7,7 @@ class BooksV1 < Grape::API
   end
 
   params do
-    requires :access_token, type: String, desc: "access token."
+    optional :access_token, type: String, desc: "access token."
   end
   resource :books do
 

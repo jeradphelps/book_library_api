@@ -2,6 +2,9 @@ class UsersV1 < Grape::API
   version 'v1', using: :header, vendor: 'appydays'
   format :json
 
+  params do
+    optional :access_token, type: String, desc: "access token."
+  end
   resource :users do
 
     desc "Return a User"
@@ -19,12 +22,14 @@ class UsersV1 < Grape::API
       requires :last_name,  type: String, desc: "The User last name"
       requires :email,      type: String, desc: "The User email address"
       requires :password,   type: String, desc: "The User password"
+      requires :city_state_str,   type: String, desc: "The User city state string"
     end
     post do
       User.create!(:first_name => params[:first_name],
         :last_name => params[:last_name],
         :email => params[:email],
-        :password => params[:password])
+        :password => params[:password],
+        :city_state_str => params[:city_state_str])
     end
 
     desc "Update a User."
@@ -33,6 +38,7 @@ class UsersV1 < Grape::API
       requires :last_name,  type: String, desc: "The User last name"
       requires :email,      type: String, desc: "The User email address"
       requires :password,   type: String, desc: "The User password"
+      requires :city_state_str,   type: String, desc: "The User city state string"
     end
     put ':id' do
       authenticate! params[:access_token]
@@ -40,7 +46,8 @@ class UsersV1 < Grape::API
       user.update(:first_name => params[:first_name],
         :last_name => params[:last_name],
         :email => params[:email],
-        :password => params[:password])
+        :password => params[:password],
+        :city_state_str => params[:city_state_str])
       user
     end
 
