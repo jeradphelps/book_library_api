@@ -21,7 +21,6 @@ class UsersV1 < Grape::API
       requires :password,   type: String, desc: "The User password"
     end
     post do
-      authenticate! params[:access_token]
       User.create!(:first_name => params[:first_name],
         :last_name => params[:last_name],
         :email => params[:email],
