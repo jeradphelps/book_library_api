@@ -32,6 +32,7 @@ class BookInstancesV1 < Grape::API
       requires :genre,  type: String, desc: "The Book genre"
       requires :isbn,   type: String, desc: "The Book isbn"
       requires :author, type: String, desc: "The Book author"
+      requires :user_id, type: String, desc: "The user who owns this book instance"
     end
     post do
       book = Book.where(
@@ -40,7 +41,7 @@ class BookInstancesV1 < Grape::API
         genre: params[:genre],
         author: params[:author]
       ).first_or_create
-      BookInstance.create!(:book_id => book.id)
+      BookInstance.create!(:book_id => book.id, :user_id => params[:user_id])
     end
 
     desc "Update a Book Instance."

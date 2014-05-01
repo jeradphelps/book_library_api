@@ -10,6 +10,7 @@ module API
     mount API::BooksV1
     mount API::BookInstancesV1
     mount API::UsersV1
+    mount API::LoansV1
 
     if Rails.env.development?
       add_swagger_documentation :base_path => "http://localhost:3000/api", 

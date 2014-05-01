@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140426164014) do
+ActiveRecord::Schema.define(version: 20140501004427) do
 
   create_table "access_tokens", force: true do |t|
     t.string   "token"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 20140426164014) do
     t.string   "author"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "loans", force: true do |t|
+    t.integer  "book_instance_id",                 null: false
+    t.integer  "lender_id",                        null: false
+    t.integer  "borrower_id",                      null: false
+    t.boolean  "approved",         default: false, null: false
+    t.boolean  "returned",         default: false, null: false
+    t.datetime "requested_at"
+    t.datetime "lent_at"
+    t.date     "due_on"
+    t.datetime "returned_at"
   end
 
   create_table "users", force: true do |t|
