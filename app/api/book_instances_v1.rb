@@ -10,12 +10,13 @@ class BookInstancesV1 < Grape::API
     optional :access_token, type: String, desc: "access token."
   end
   resource :book_instances do
-    desc "Return all book instances."
+    desc "Search for book instances."
     params do
-      requires :search_text, type: String, desc: "Search Text--title or author."
+      optional :search_text, type: String, desc: "Search Text--title or author."
+      optional :user_id, type: Integer, desc: "user_id of book instance owner."
     end
     get do
-      BookInstance.search(params[:search_text])
+      BookInstance.search(params)
     end
 
     desc "Return a book instance."
