@@ -59,7 +59,9 @@ class UsersV1 < Grape::API
     get do
       user = User.find_by_email(params[:email]) || error!("Not Found", 404)
       if user.authenticate(params[:password])
-        return AccessToken.create!
+        token = AccessToken.create!
+
+        { token: token.token, user: user }
       else
         error!('401 Unauthorized', 401)
       end
