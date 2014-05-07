@@ -37,7 +37,9 @@ class BookInstancesV1 < Grape::API
 
       if book_instance.present?
         book_instance.attributes.merge({
-          book: book_instance.book,
+          book: book_instance.book.attributes.merge({
+            rating: book_instance.book.rating
+          }),
           user: {
             first_name: book_instance.user.first_name,
             last_name: book_instance.user.last_name,

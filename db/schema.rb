@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140501004427) do
+ActiveRecord::Schema.define(version: 20140507015246) do
 
   create_table "access_tokens", force: true do |t|
     t.string   "token"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20140501004427) do
     t.datetime "lent_at"
     t.date     "due_on"
     t.datetime "returned_at"
+  end
+
+  create_table "reviews", force: true do |t|
+    t.integer "book_id"
+    t.integer "user_id"
+    t.integer "rating"
+    t.text    "comments"
   end
 
   create_table "users", force: true do |t|
