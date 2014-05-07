@@ -34,10 +34,11 @@ class UsersV1 < Grape::API
 
     desc "Update a User."
     params do
+      requires :id, type: Integer, desc: "The User Id"
       requires :first_name, type: String, desc: "The User first name"
       requires :last_name,  type: String, desc: "The User last name"
       requires :email,      type: String, desc: "The User email address"
-      requires :password,   type: String, desc: "The User password"
+      optional :password,   type: String, desc: "The User password"
       requires :city_state_str,   type: String, desc: "The User city state string"
     end
     put ':id' do
@@ -46,8 +47,9 @@ class UsersV1 < Grape::API
       user.update(:first_name => params[:first_name],
         :last_name => params[:last_name],
         :email => params[:email],
-        :password => params[:password],
         :city_state_str => params[:city_state_str])
+
+      user.update(:password => params[:password]) if params[:password].present?
       user
     end
 
