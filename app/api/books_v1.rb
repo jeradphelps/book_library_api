@@ -24,7 +24,7 @@ class BooksV1 < Grape::API
       requires :search_text, type: String, desc: "Search text."
     end
     get 'available' do
-      Book.search params[:search_text]
+      Book.search(params[:search_text]).map{ |b| b.for_api }
     end
 
     desc "View lenders who have this book."
