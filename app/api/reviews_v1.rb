@@ -15,8 +15,13 @@ class ReviewsV1 < Grape::API
     params do
       requires :book_id, type: Integer, desc: "ID of book being reviewing."
     end
-    post ':book_id' do
-      Review.where(book_id: params[:book_id])
+    get ':book_id' do
+      Review.where(book_id: params[:book_id]).map do |r|
+        r.attributes.merge({
+          book: r.book.for_api,
+          user: r.user.for_api
+        })
+      end
     end
 
     desc "Post a review"

@@ -11,4 +11,10 @@ class Book < ActiveRecord::Base
     reviews.average(:rating) || ''
   end
 
+  def for_api
+    attributes.merge({
+      rating: rating
+    })
+  end
+
 end

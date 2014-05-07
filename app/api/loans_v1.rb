@@ -37,7 +37,7 @@ class LoansV1 < Grape::API
 
       loans.map do |l|
         l.attributes.merge({
-          book: l.book_instance.book
+          book: l.book_instance.book.for_api
         })
       end
     end
@@ -81,7 +81,7 @@ class LoansV1 < Grape::API
 
       loans.map do |l|
         l.attributes.merge({
-          book: l.book_instance.book,
+          book: l.book_instance.book.for_api,
           borrower: {
             first_name: l.borrower.first_name,
             last_name: l.borrower.last_name,
@@ -114,7 +114,7 @@ class LoansV1 < Grape::API
 
       loans.map do |l|
         l.attributes.merge({
-          book: l.book_instance.book,
+          book: l.book_instance.book.for_api,
           lender: {
             first_name: l.lender.first_name,
             last_name: l.lender.last_name,
