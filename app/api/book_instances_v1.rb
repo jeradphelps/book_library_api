@@ -16,7 +16,16 @@ class BookInstancesV1 < Grape::API
       optional :user_id, type: Integer, desc: "user_id of book instance owner."
     end
     get do
-      BookInstance.search(params)
+      BookInstance.search(params).map do |b|
+        b.attributes.merge({
+          book: b.book,
+          user: {
+            first_name: b.user.first_name,
+            last_name: b.user.last_name,
+            city_state_str: b.user.city_state_str
+          }
+        })
+      end
     end
 
     desc "Return a book instance."
@@ -24,7 +33,20 @@ class BookInstancesV1 < Grape::API
       requires :id, type: Integer, desc: "Status id."
     end
     get ':id' do
-      BookInstance.find_by_id(params[:id]) || error!("Not Found", 404)
+      book_instance = BookInstance.find_by_id(params[:id])
+
+      if book_instance.present?
+        book_instance.attributes.merge({
+          book: book_instance.book,
+          user: {
+            first_name: book_instance.user.first_name,
+            last_name: book_instance.user.last_name,
+            city_state_str: book_instance.user.city_state_str
+          }
+        })
+      else
+        error!("Not Found", 404)
+      end
     end
 
     desc "Create a book instance."
