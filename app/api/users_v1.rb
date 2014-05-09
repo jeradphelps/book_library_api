@@ -68,5 +68,21 @@ class UsersV1 < Grape::API
         error!('401 Unauthorized', 401)
       end
     end
+
+    desc "Send user password reset information."
+    params do
+      requires :email, type: String, desc: "The User email address"
+    end
+    post 'send_password_reset' do
+      user = User.find_by_email(params[:email])
+
+      if user.present?
+        # TODO: send an email to user
+        true
+      else
+        error!("Not Found", 404)
+      end
+    end
+
   end
 end
