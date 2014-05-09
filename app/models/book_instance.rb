@@ -12,4 +12,11 @@ class BookInstance < ActiveRecord::Base
   
     result
   end
+
+  def for_api
+    attributes.merge({
+      book: book.for_api,
+      user: user.for_api
+    })
+  end
 end

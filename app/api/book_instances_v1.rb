@@ -17,10 +17,7 @@ class BookInstancesV1 < Grape::API
     end
     get do
       BookInstance.search(params).map do |b|
-        b.attributes.merge({
-          book: b.book.for_api,
-          user: b.user.for_api
-        })
+        b.for_api
       end
     end
 
@@ -32,10 +29,7 @@ class BookInstancesV1 < Grape::API
       book_instance = BookInstance.find_by_id(params[:id])
 
       if book_instance.present?
-        book_instance.attributes.merge({
-          book: book_instance.book.for_api,
-          user: book_instance.user.for_api
-        })
+        book_instance.for_api
       else
         error!("Not Found", 404)
       end

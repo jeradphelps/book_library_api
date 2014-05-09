@@ -35,13 +35,7 @@ class BooksV1 < Grape::API
       book_instances = BookInstance.where(book_id: params[:id])
 
       book_instances.map do |b|
-        {
-          first_name: b.user.first_name,
-          last_name: b.user.last_name,
-          city_state_str: b.user.city_state_str,
-          book_instance_id: b.id,
-          book_id: b.book_id
-        }
+        b.for_api
       end
 
     end
