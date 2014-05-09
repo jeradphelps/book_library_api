@@ -9,11 +9,11 @@ class UsersV1 < Grape::API
 
     desc "Return a User"
     params do
-      requires :email, type: Integer, desc: "User email address."
+      requires :id, type: Integer, desc: "ID of user."
     end
-    get ':email' do
+    get ':id' do
       authenticate! params[:access_token]
-      User.find_by_email(params[:email]) || error!("Not Found", 404)
+      User.find_by_id(params[:id]) || error!("Not Found", 404)
     end
 
     desc "Create a user."
