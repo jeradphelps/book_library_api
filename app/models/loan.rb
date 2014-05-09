@@ -6,6 +6,14 @@ class Loan < ActiveRecord::Base
 
   before_create :set_requested
 
+  def for_api
+    attributes.merge({
+      book: book_instance.book.for_api,
+      borrower: borrower.for_api,
+      lender: lender.for_api
+    })
+  end
+
   private
 
     def set_requested

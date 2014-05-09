@@ -36,9 +36,7 @@ class LoansV1 < Grape::API
       loans = Loan.where(lender_id: params[:user_id], approved: false)
 
       loans.map do |l|
-        l.attributes.merge({
-          book: l.book_instance.book.for_api
-        })
+        l.for_api
       end
     end
 
@@ -80,14 +78,7 @@ class LoansV1 < Grape::API
       loans = Loan.where(lender_id: params[:user_id], approved: true, returned: false)
 
       loans.map do |l|
-        l.attributes.merge({
-          book: l.book_instance.book.for_api,
-          borrower: {
-            first_name: l.borrower.first_name,
-            last_name: l.borrower.last_name,
-            city_state_str: l.borrower.city_state_str
-          }
-        })
+        l.for_api
       end
     end
 
@@ -113,14 +104,7 @@ class LoansV1 < Grape::API
       loans = Loan.where(borrower_id: params[:user_id], approved: true, returned: false)
 
       loans.map do |l|
-        l.attributes.merge({
-          book: l.book_instance.book.for_api,
-          lender: {
-            first_name: l.lender.first_name,
-            last_name: l.lender.last_name,
-            city_state_str: l.lender.city_state_str
-          }
-        })
+        l.for_api
       end
     end
   end
