@@ -7,11 +7,17 @@ class Loan < ActiveRecord::Base
   before_create :set_requested
 
   def for_api
-    attributes.merge({
+    a = attributes.merge({
       book: book_instance.book.for_api,
       borrower: borrower.for_api,
       lender: lender.for_api
     })
+
+    a[:requested_at] = requested_at.strftime('%m/%d/%Y') if requested_at.present?
+    a[:lent_at] = lent_at.strftime('%m/%d/%Y') if lent_at.present?
+    a[:due_on] = due_on.strftime('%m/%d/%Y') if due_on.present?
+
+    a
   end
 
   private
